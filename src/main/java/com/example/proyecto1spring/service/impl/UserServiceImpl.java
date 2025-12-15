@@ -4,6 +4,7 @@ import com.example.proyecto1spring.entity.Usuario;
 import com.example.proyecto1spring.repository.UserRepository;
 import com.example.proyecto1spring.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +24,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public Usuario createUser(Usuario user, String roleName) {
+        java.util.Objects.requireNonNull(user, "user no puede ser nulo");
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new IllegalArgumentException("Email ya existe");
         }
@@ -42,11 +45,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<Usuario> findById(Long id) {
+        java.util.Objects.requireNonNull(id, "id no puede ser nulo");
         return userRepository.findById(id);
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
+        java.util.Objects.requireNonNull(id, "id no puede ser nulo");
         userRepository.deleteById(id);
     }
 
@@ -56,7 +62,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public Usuario toggleEnabled(Long id) {
+        java.util.Objects.requireNonNull(id, "id no puede ser nulo");
         Optional<Usuario> u = userRepository.findById(id);
         if (u.isPresent()) {
             Usuario user = u.get();
@@ -68,7 +76,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public Usuario updateUser(Long id, Usuario userData) {
+        java.util.Objects.requireNonNull(id, "id no puede ser nulo");
+        java.util.Objects.requireNonNull(userData, "userData no puede ser nulo");
         Optional<Usuario> opt = userRepository.findById(id);
         if (opt.isEmpty()) {
             throw new IllegalArgumentException("Usuario no encontrado");

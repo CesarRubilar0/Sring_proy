@@ -41,7 +41,8 @@ public class SecurityConfig {
             )
             // Ignorar CSRF para la consola H2 (permite que el formulario de la consola funcione)
             .csrf(csrf -> csrf
-                .ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"))
+                // Evitar el uso de AntPathRequestMatcher (deprecado)
+                .ignoringRequestMatchers("/h2-console/**")
             )
             .formLogin(form -> form
                 .loginPage("/login")

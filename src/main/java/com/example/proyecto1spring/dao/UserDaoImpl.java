@@ -23,6 +23,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<Usuario> findById(Long id) {
+        java.util.Objects.requireNonNull(id, "id no puede ser nulo");
         return userRepository.findById(id);
     }
 
@@ -43,11 +44,13 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Usuario save(Usuario usuario) {
+        java.util.Objects.requireNonNull(usuario, "usuario no puede ser nulo");
         return userRepository.save(usuario);
     }
 
     @Override
     public void deleteById(Long id) {
+        java.util.Objects.requireNonNull(id, "id no puede ser nulo");
         userRepository.deleteById(id);
     }
 }

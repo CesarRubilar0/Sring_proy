@@ -23,6 +23,7 @@ public class RoleDaoImpl implements RoleDao {
 
     @Override
     public Optional<Role> findById(Long id) {
+        java.util.Objects.requireNonNull(id, "id no puede ser nulo");
         return roleRepository.findById(id);
     }
 
@@ -33,11 +34,13 @@ public class RoleDaoImpl implements RoleDao {
 
     @Override
     public Role save(Role role) {
+        java.util.Objects.requireNonNull(role, "role no puede ser nulo");
         return roleRepository.save(role);
     }
 
     @Override
     public void deleteById(Long id) {
+        java.util.Objects.requireNonNull(id, "id no puede ser nulo");
         roleRepository.deleteById(id);
     }
 }
